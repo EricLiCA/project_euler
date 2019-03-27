@@ -10,8 +10,8 @@ auto getData() {
 
 auto sumOfMultiplesOf(long long x, long long limit) {
     limit--;
-    long long highestMultiple = limit - limit % x;
-    long long numberOfMultiples = limit / x;
+    auto highestMultiple = limit - limit % x;
+    auto numberOfMultiples = limit / x;
     return (x + highestMultiple) * numberOfMultiples / 2;
 }
 
@@ -20,7 +20,7 @@ auto multiplesOf3And5(long long n) {
 }
 
 int main() {
-    int t = 0;
+    auto t = 0;
     std::cin >> t;
     for (int testCase = 0; testCase < t; testCase++) {
         auto n = getData();
