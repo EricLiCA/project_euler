@@ -6,15 +6,15 @@ void getData(long long &n) {
     std::cin >> n;
 }
 
-long long sumOfMultiplesOfXBelowN(long long x, long long n) {
-    n--;
-    long long highestMultipleOfXBelowN = n - n % x;
-    long long numberOfMultiplesBelowN = n / x;
-    return (x + highestMultipleOfXBelowN) * numberOfMultiplesBelowN / 2;
+long long sumOfMultiplesOf(long long x, long long limit) {
+    limit--;
+    long long highestMultiple = limit - limit % x;
+    long long numberOfMultiples = limit / x;
+    return (x + highestMultiple) * numberOfMultiples / 2;
 }
 
 long long multiplesOf3And5(long long n) {
-    return sumOfMultiplesOfXBelowN(3, n) + sumOfMultiplesOfXBelowN(5, n) - sumOfMultiplesOfXBelowN(15, n);
+    return sumOfMultiplesOf(3, n) + sumOfMultiplesOf(5, n) - sumOfMultiplesOf(15, n);
 }
 
 int main() {
