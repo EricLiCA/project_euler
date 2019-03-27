@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <numeric>
+#include <algorithm>
 
 struct Data {
     std::string series;
@@ -10,7 +11,7 @@ struct Data {
 };
 
 auto getData() {
-    long long n, k;
+    long long n;
     Data data;
     std::cin >> n >> data.k;
     std::cin.ignore();
@@ -18,27 +19,29 @@ auto getData() {
     return data;
 }
 
+auto toInt(char c) {
+    return c - '0';
+}
+
 auto largestProductInASeries(const std::string &series, const long long k) {
-    long long low = 0, high = low + k - 1;
+    long long low = 0;
     long long currentProduct = 0LL, highestProduct = 0LL;
 
-    bool initialized = false;
-    auto charMultiply = [](long long res, char c) { return res * (c - '0'); };
+    auto charMultiply = [](long long res, char c) { return res * toInt(c); };
 
-    while (high < series.size()) {
-        if (!initialized) {
-            currentProduct = std::accumulate(series.begin() + low, series.begin() + high, 1LL, charMultiply);
-            initialized = true;
+    while (low + k - 1 < series.size()) {
+        if (currentProduct == 0) {
+            currentProduct = std::accumulate(series.begin() + low, series.begin() + low + k, 1LL, charMultiply);
         } else {
-            currentProduct /= series[low - 1];
-            currentProduct *= series[high];
+            currentProduct /= toInt(series[low - 1]);
+            currentProduct *= toInt(series[low + k - 1]);
         }
 
         if (currentProduct == 0) {
-            initialized = false;
-            low += k, high += k;
+            auto zero = std::find(series.begin() + low, series.begin() + low + k, '0');
+            low += zero - (series.begin() + low) + 1;
         } else {
-            low++, high++;
+            low++;
         }
 
         highestProduct = std::max(highestProduct, currentProduct);
