@@ -11,15 +11,12 @@ auto getData() {
 }
 
 auto largestPrimeFactor(long long n) {
-    long long largest = 1;
     auto candidateLimit = sqrt(n);
     for (auto candidate = 2; candidate <= candidateLimit; candidate++) {
-        if (n % candidate == 0) {
-            largest = candidate;
-            while (n % candidate == 0) n /= candidate;
-        }
+        while (n % candidate == 0) n /= candidate;
+        if (n == 1) return candidate;
     }
-    return std::max(largest, n);
+    return n;
 }
 
 int main() {
