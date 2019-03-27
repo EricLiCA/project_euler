@@ -5,12 +5,14 @@
 #include <algorithm>
 #include <vector>
 
-void getData(long long &n) {
+auto getData() {
+    long long n;
     std::cin >> n;
+    return n;
 }
 
-int reverse(int x) {
-    int result = 0;
+auto reverse(long long x) {
+    auto result = 0;
     while (x) {
         result = result * 10 + x % 10;
         x /= 10;
@@ -22,11 +24,11 @@ bool isPalindrome(int x) {
     return reverse(x) == x;
 }
 
-std::vector<int> palindromeCandidates() {
-    std::vector<int> candidates;
-    for (int i = 101; i < 1000; i++) {
-        for (int j = i; j < 1000; j++) {
-            int product = i * j;
+auto palindromeCandidates() {
+    std::vector<long long> candidates;
+    for (auto i = 101; i < 1000; i++) {
+        for (auto j = i; j < 1000; j++) {
+            auto product = i * j;
             if (isPalindrome(product)) candidates.emplace_back(product);
         }
     }
@@ -34,19 +36,17 @@ std::vector<int> palindromeCandidates() {
     return candidates;
 }
 
-long long largestPalindromeProduct(std::vector<int> candidates, long long n) {
+auto largestPalindromeProduct(std::vector<long long> candidates, long long n) {
     auto it = std::lower_bound(candidates.begin(), candidates.end(), n);
     return it == candidates.begin() ? *it : *(it - 1);
 }
 
 int main() {
     auto candidates = palindromeCandidates();
-
-    int t = 0;
+    auto t = 0;
     std::cin >> t;
-    for (int testCase = 0; testCase < t; testCase++) {
-        long long n;
-        getData(n);
+    for (auto testCase = 0; testCase < t; testCase++) {
+        auto n = getData();
 
         std::cout << largestPalindromeProduct(candidates, n) << std::endl;
     }

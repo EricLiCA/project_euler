@@ -3,11 +3,13 @@
 #include <iostream>
 #include <algorithm>
 
-void getData(long long &n) {
+auto getData() {
+    long long n;
     std::cin >> n;
+    return n;
 }
 
-long long evenFibonacciNumbers(long long n) {
+auto evenFibonacciNumbers(long long n) {
     long long sum = 0;
     long long a = 1, b = 2;
 
@@ -21,12 +23,10 @@ long long evenFibonacciNumbers(long long n) {
 }
 
 int main() {
-    int t = 0;
+    auto t = 0;
     std::cin >> t;
-    for (int testCase = 0; testCase < t; testCase++) {
-        long long n;
-        getData(n);
-
+    for (auto testCase = 0; testCase < t; testCase++) {
+        auto n = getData();
         std::cout << evenFibonacciNumbers(n) << std::endl;
     }
 }

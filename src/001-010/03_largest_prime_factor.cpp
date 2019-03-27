@@ -4,14 +4,16 @@
 #include <cmath>
 #include <algorithm>
 
-void getData(long long &n) {
+auto getData() {
+    long long n;
     std::cin >> n;
+    return n;
 }
 
-long long largestPrimeFactor(long long n) {
+auto largestPrimeFactor(long long n) {
     long long largest = 1;
-    double candidateLimit = sqrt(n);
-    for (long long candidate = 2; candidate <= candidateLimit; candidate++) {
+    auto candidateLimit = sqrt(n);
+    for (auto candidate = 2; candidate <= candidateLimit; candidate++) {
         if (n % candidate == 0) {
             largest = candidate;
             while (n % candidate == 0) n /= candidate;
@@ -21,11 +23,10 @@ long long largestPrimeFactor(long long n) {
 }
 
 int main() {
-    int t = 0;
+    auto t = 0;
     std::cin >> t;
-    for (int testCase = 0; testCase < t; testCase++) {
-        long long n;
-        getData(n);
+    for (auto testCase = 0; testCase < t; testCase++) {
+        auto n = getData();
 
         std::cout << largestPrimeFactor(n) << std::endl;
     }

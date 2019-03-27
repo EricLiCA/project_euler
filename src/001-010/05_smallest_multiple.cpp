@@ -4,17 +4,19 @@
 #include <cmath>
 #include <vector>
 
-void getData(long long &n) {
+auto getData() {
+    long long n;
     std::cin >> n;
+    return n;
 }
 
-std::vector<long long> computePrimes(long long n) {
+auto computePrimes(long long n) {
     std::vector<long long> primes;
     std::vector<char> sieve(n + 1, 0);
-    for (int i = 2; i < sieve.size(); i++) {
+    for (auto i = 2; i < sieve.size(); i++) {
         if (sieve[i] == 0) {
             primes.emplace_back(i);
-            for (int j = 2 * i; j < sieve.size(); j += i) {
+            for (auto j = 2 * i; j < sieve.size(); j += i) {
                 sieve[j] = 1;
             }
         }
@@ -22,14 +24,14 @@ std::vector<long long> computePrimes(long long n) {
     return primes;
 }
 
-long long highestPowerOf(long long x, long long limit) {
-    int power = (int) (log(limit) / log(x));
+auto highestPowerOf(long long x, long long limit) {
+    int power = log(limit) / log(x);
     return pow(x, power);
 }
 
-long long smallestMultiple(long long n) {
+auto smallestMultiple(long long n) {
     auto primes = computePrimes(n);
-    int result = 1;
+    auto result = 1;
     for (auto &prime: primes) {
         result *= highestPowerOf(prime, n);
     }
@@ -37,11 +39,10 @@ long long smallestMultiple(long long n) {
 }
 
 int main() {
-    int t = 0;
+    auto t = 0;
     std::cin >> t;
-    for (int testCase = 0; testCase < t; testCase++) {
-        long long n;
-        getData(n);
+    for (auto testCase = 0; testCase < t; testCase++) {
+        auto n = getData();
 
         std::cout << smallestMultiple(n) << std::endl;
     }

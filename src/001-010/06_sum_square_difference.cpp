@@ -2,29 +2,30 @@
 
 #include <iostream>
 
-void getData(long long &n) {
+auto getData() {
+    long long n;
     std::cin >> n;
+    return n;
 }
 
-long long gaussSum(long long n) {
+auto gaussSum(long long n) {
     return ((n + 1) * n) / 2;
 }
 
-long long sumOfSquares(long long n) {
+auto sumOfSquares(long long n) {
     return (n * (n + 1) * (2 * n + 1)) / 6;
 }
 
-long long sumSquareDifference(long long n) {
-    long long sum = gaussSum(n);
+auto sumSquareDifference(long long n) {
+    auto sum = gaussSum(n);
     return sum * sum - sumOfSquares(n);
 }
 
 int main() {
-    int t = 0;
+    auto t = 0;
     std::cin >> t;
-    for (int testCase = 0; testCase < t; testCase++) {
-        long long n;
-        getData(n);
+    for (auto testCase = 0; testCase < t; testCase++) {
+        auto n = getData();
 
         std::cout << sumSquareDifference(n) << std::endl;
     }

@@ -22,7 +22,7 @@ auto multiplesOf3And5(long long n) {
 int main() {
     auto t = 0;
     std::cin >> t;
-    for (int testCase = 0; testCase < t; testCase++) {
+    for (auto testCase = 0; testCase < t; testCase++) {
         auto n = getData();
         std::cout << multiplesOf3And5(n) << std::endl;
     }
