@@ -8,7 +8,9 @@
 #include <iterator>
 #include <cmath>
 
-auto getData(int n) {
+auto getData() {
+    int n;
+    std::cin >> n;
     std::vector <std::string> nums(n);
     std::copy_n(std::istream_iterator<std::string>(std::cin), n, nums.begin());
     return nums;
@@ -23,10 +25,10 @@ auto maxDigitNum(int digits) {
     return result;
 }
 
-auto largeSum(std::vector <std::string> &nums, long long maxDigitsNum, int n) {
+auto largeSum(std::vector <std::string> &nums, long long maxDigitsNum) {
     auto firstDigitsSum = [&](long long digits, std::string &num) {
         return digits + std::stoll(
-                num.substr(0, log10(maxDigitsNum) + 1 + log10(n)));
+                num.substr(0, log10(maxDigitsNum) + 1 + log10(nums.size())));
     };
     auto firstDigits = std::accumulate(nums.begin(), nums.end(), 0LL, firstDigitsSum);
     while (firstDigits > maxDigitsNum) {
@@ -36,8 +38,6 @@ auto largeSum(std::vector <std::string> &nums, long long maxDigitsNum, int n) {
 }
 
 int main() {
-    int n;
-    std::cin >> n;
-    auto nums = getData(n);
-    std::cout << largeSum(nums, maxDigitNum(10), n) << std::endl;
+    auto nums = getData();
+    std::cout << largeSum(nums, maxDigitNum(10)) << std::endl;
 }
