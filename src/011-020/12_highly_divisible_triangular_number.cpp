@@ -15,7 +15,7 @@ auto primeFactorCounts(int n) {
 
     if (n % 2 == 0) {
         while (n % 2 == 0) {
-            n /= 2;
+            n >>= 1;
             factorCounts[2]++;
         }
         // remove one 2 since we divide by 2 to generate the triangle number
@@ -44,7 +44,7 @@ auto numberOfFactors(std::unordered_map<int, unsigned> factorCounts) {
 }
 
 auto triangleNumber(int n) {
-    return n * (n + 1) / 2;
+    return (n * (n + 1)) >> 1;
 }
 
 auto highlyDivisibleTriangularNumber(int n) {
