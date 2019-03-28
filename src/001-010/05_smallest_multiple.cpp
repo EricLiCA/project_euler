@@ -13,9 +13,11 @@ auto getData() {
 auto computePrimes(long long n) {
     std::vector<long long> primes;
     std::vector<char> sieve(n + 1, 0);
-    for (auto i = 2; i < sieve.size(); i++) {
+    auto limit = sqrt(sieve.size());
+    for (auto i = 2; i <= sieve.size(); i++) {
         if (sieve[i] == 0) {
             primes.emplace_back(i);
+            if (i > limit) continue;
             for (auto j = 2 * i; j < sieve.size(); j += i) {
                 sieve[j] = 1;
             }

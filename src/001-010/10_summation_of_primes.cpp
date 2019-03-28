@@ -1,20 +1,14 @@
-// https://www.hackerrank.com/contests/projecteuler/challenges/euler007
+// https://www.hackerrank.com/contests/projecteuler/challenges/euler010
 
 #include <iostream>
-#include <cmath>
-#include <algorithm>
 #include <vector>
+#include <numeric>
+#include <cmath>
 
 auto getData() {
     long long n;
     std::cin >> n;
     return n;
-}
-
-auto upperBoundOfNthPrime(long long n) {
-    long long rossersTheoreticalUpperBound = n * (log(n) + log(log(n)));
-    // Rosser's upper bound only works for n >= 6. 11 is the 5th prime.
-    return std::max(11LL, (long long) std::ceil(rossersTheoreticalUpperBound));
 }
 
 auto computePrimesUntil(long long n) {
@@ -33,15 +27,22 @@ auto computePrimesUntil(long long n) {
     return primes;
 }
 
-auto nthPrime(long long n) {
-    return computePrimesUntil(upperBoundOfNthPrime(n))[n - 1];
+auto summationOfPrimes(long long n, std::vector<long long> primes) {
+    auto sum = 0LL;
+    for (auto &prime: primes) {
+        if (prime <= n) sum += prime;
+        else break;
+    }
+    return sum;
 }
 
 int main() {
     auto t = 0;
+    const auto HACKERRANK_LIMIT = 1000000;
+    auto primes = computePrimesUntil(HACKERRANK_LIMIT);
     std::cin >> t;
     for (auto testCase = 0; testCase < t; testCase++) {
         auto n = getData();
-        std::cout << nthPrime(n) << std::endl;
+        std::cout << summationOfPrimes(n, primes) << std::endl;
     }
 }
