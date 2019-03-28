@@ -42,11 +42,11 @@ public:
         return largestProduct;
     }
 
+private:
     enum SeriesType {
         HORIZONTAL, VERTICAL, DIAGONAL_RIGHT, DIAGONAL_LEFT
     };
 
-private:
     template<typename T>
     T largestProductInASeries(SeriesType type, int startingIndex) {
         int low = startingIndex, current = low;
