@@ -78,7 +78,7 @@ private:
     template<typename T>
     T initializeProductInASeries(SeriesType type, int &index) {
         T product = 1;
-        for (int i = 0; i < nAdjacents_; i++) {
+        for (int i = 0; i < nAdjacents_ && product > 0; i++) {
             product *= grid_[index];
             index = nextIndex(type, index);
             if (index < 0) return 0;
